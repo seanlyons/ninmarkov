@@ -26,16 +26,19 @@
     FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
     OTHER DEALINGS IN THE SOFTWARE.
 */
-
-function generate_markov_table($text, $look_forward) {
-    //$table = array();
-    $table = file('./lyrics.txt');
+$look_forward = 4;
+$text = file('./lyrics.txt');
+echo 'foo';
+//function generate_markov_table($text, $look_forward) {
+    $table = array('abc' => 'def');
+    //echo $table;
     
     // now walk through the text and make the index table
     for ($i = 0; $i < strlen($text); $i++) {
         $char = substr($text, $i, $look_forward);
-        if (!isset($table[$char])) $table[$char] = array();
+        if (!/*isset*/($table[$char])) $table[$char] = 'foo';//array();
     }              
+print_r($table); exit ("fuck shit");
     
     // walk the array again and count the numbers
     for ($i = 0; $i < (strlen($text) - $look_forward); $i++) {
@@ -47,13 +50,18 @@ function generate_markov_table($text, $look_forward) {
         } else {
             $table[$char_index][$char_count] = 1;
         }                
-    } 
+   // print_r($table);
+} 
 
-    return $table;
-}
-
-function generate_markov_text($length, $table, $look_forward) {
+//    return $table;
+//}
+echo 'bar\r\n';
+//function generate_markov_text($length, $table, $look_forward) {
     // get first character
+   echo 'begin\r\n';
+   //echo($table);
+   echo 'end\r\n';
+
     $char = array_rand($table);
     $o = $char;
 
@@ -63,15 +71,17 @@ function generate_markov_text($length, $table, $look_forward) {
         if ($newchar) {
             $char = $newchar;
             $o .= $newchar;
-        } else {       
+            print_r($o);
+	} else {       
             $char = array_rand($table);
         }
     }
+    echo 'here comes o';
+    echo $o;
+    //return $o;
+//}
     
-    return $o;
-}
-    
-
+echo 'baz';
 function return_weighted_char($array) {
     if (!$array) return false;
     
@@ -82,4 +92,5 @@ function return_weighted_char($array) {
         $rand -= $weight;
     }
 }
+echo 'quoz';
 ?>
